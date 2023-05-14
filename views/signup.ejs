@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="CSS/shared.css" />
+  <link rel="stylesheet" href="CSS/signup.css" />
+  <title>Netflix</title>
+  <link rel="icon" href="https://1000logos.net/wp-content/uploads/2017/05/Netflix-Logo-2006.png" type="image/x-icon">
+</head>
+
+<body>
+  <header>
+    <a href="index">
+      <img src="images/Netflix-logo.png" alt="Netflix-logo" class="netflix_logo" />
+    </a>
+  </header>
+  <main>
+    <div class="signup_bg"></div>
+    <div class="signup_card">
+      <div class="signup_form">
+        <h2>Sign Up</h2>
+        <form action="/signup" method="post">
+          <label for="fullname">Enter Username</label>
+          <br />
+          <input type="text" name="name" placeholder="Enter user name" /><br />
+          <br />
+          <label for="useremail">Enter Email</label>
+          <br />
+          <input type="email" name="email" placeholder="Enter Email Id" /> <br />
+          <br />
+          <label for="number">Mobile No.</label> <br />
+          <input type="Number" name="mobile" placeholder="Enter YOur Mobile Number" /> <br />
+          <br />
+          <label for="useremail">Create Password</label> <br />
+          <input type="password" name="password" placeholder="Enter minimum 8 character password" /> <br />
+          <br />
+          <label for="useremail">Re-Enter Password</label> <br />
+          <input type="password" name="cpassword" placeholder="Confirm password" /><br />
+          <br />
+
+          <center><button type="submit" class="signup_form_button">Create Account</button></center>
+        </form>
+        <br />
+        <br />
+        <center>
+          <p class="already-netflix-user">
+            Already Having Account?
+            <a href="login" class="signuppage_login_button">Login now.</a>
+          </p>
+        </center>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

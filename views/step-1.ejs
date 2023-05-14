@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/CSS/shared.css" />
+  <link rel="stylesheet" href="CSS/signup.css" />
+  <link rel="stylesheet" href="CSS/step.css">
+
+  <title>Step-1</title>
+
+</head>
+
+<body>
+  <header>
+    <div class="navbar">
+      <a href="index"><img src="images/Netflix-logo.png" alt="Netflix-logo" /></a>
+      <ul>
+        <li><a class="signButt" href="signup">Sign Up</a></li>
+      </ul>
+    </div>
+  </header>
+  <hr>
+
+  <div class="Step-1">
+    <div class="icons">
+      <i class="fa fa-laptop"></i>
+      <i class="fa fa-tv"></i>
+      <i class="fa fa-tablet"></i>
+      <i class="fa fa-mobile"></i>
+    </div>
+    <p style="font-size: 13px;">STEP 1 OF 2</p>
+    <h2 style="font-size: 30px; font-weight: bolder;">Finish setting up your account</h2><br>
+
+    <p style="font-size: 18px;">Netflix is personalised for you. Complete your Subscription to watch at any time.
+    </p>
+    <form action="/step-1" method="post">
+      <div class="otp_Input">
+        <b>Enter OTP</b> <input type="text" name="otp" placeholder="Enter your OTP" required><br>
+        <a href="/redirect link">Resend OTP</a>
+      </div><br>
+      <!-- <a class="next_button" >Next</a> -->
+      <button type="submit" metohd="post" id="next" class="next_button">Next</button>
+    </form>
+  </div>
+
+</body>
+
+</html>
