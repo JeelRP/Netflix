@@ -118,6 +118,7 @@ router.post('/step-1', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
+
     try {
         const email = req.body.email;
         const password = req.body.password;
@@ -125,7 +126,7 @@ router.post('/login', async (req, res) => {
         const useremail = await netflixSignupCollection.findOne({ email: email })
 
         const ismatch = bcryptjs.compare(password, useremail.password)
-
+        const token = await useremail.generateAuthToken();
         if (ismatch) {
             res.redirect('/home')
             console.log('Loged in!')
