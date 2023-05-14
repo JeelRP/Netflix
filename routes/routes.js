@@ -1,11 +1,12 @@
+require('dotenv').config();
 const express = require('express')
 const router = express.Router();
 const app = express();
 const bcryptjs = require('bcryptjs')
 const nodemailer = require("nodemailer");
 const { body, validationResult } = require('express-validator');
-const accountSid = 'AC6ce540d2d050e8cd86e332c8c928f374';
-const authToken = '3277e76edcbb89a26fa96076e6b35eae';
+const accountSid = process.env.SECRET_ID;
+const authToken = process.env.SECRET_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 const speakeasy = require('speakeasy');
 
@@ -83,7 +84,7 @@ router.post('/signup', validateRegistrationForm, async (req, res) => {
     client.messages
         .create({
             body: `Your OTP is: ${otpsend}`,
-            from: '+16813873464',
+            from: process.env.TWILIO_NUMBER,
             to: "+91" + mobile
         })
         .then(message => console.log(message.sid));
@@ -104,8 +105,8 @@ router.post('/step-1', async (req, res) => {
 
     const otp = req.body.otp;
 
-    console.log(otpsend);
-    console.log(otp);
+    // console.log(otpsend);
+    // console.log(otp);
     if (otpsend === otp) {
         console.log("OTP is same");
         res.redirect('/step-2')
@@ -117,25 +118,6 @@ router.post('/step-1', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-
-    // netflixSignupCollection.findOne({
-    //     email: req.body.email
-    // })
-    //     .then((user) => {
-    //         if (user) {
-    //             if (user.password === req.body.password) {
-    //                 res.redirect('/')
-    //                 console.log('Logged in suucessfully');
-    //             }
-    //             else {
-    //                 res.send("Wrong password")
-    //             }
-    //         }
-    //         else {
-    //             res.render('noemail')
-    //         }
-    //     })
-
     try {
         const email = req.body.email;
         const password = req.body.password;
