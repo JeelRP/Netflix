@@ -1,6 +1,8 @@
+require('dotenv').config();
 const mongoose = require('mongoose')
 const validator = require('validator');
 const bcryptjs = require('bcryptjs');
+const jwt = require("jsonwebtoken");
 mongoose.set("strictQuery", true);
 
 mongoose.connect('mongodb://127.0.0.1:27017/NetflixLatest', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -10,26 +12,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/NetflixLatest', { useNewUrlParser: t
     .catch((err) => {
         console.log(err);
     })
-
-// const netflixSignupSchema = new mongoose.Schema({
-
-//     name: {
-//         type: String,
-//         required: true,
-//     },
-//     email: {
-//         type: String,
-//         required: true,
-//     },
-//     password: {
-//         type: String,
-//         required: true,
-//     },
-//     cpassword: {
-//         type: String,
-//         required: true,
-//     }
-// })
 
 const netflixSignupSchema = new mongoose.Schema({
 
@@ -44,22 +26,39 @@ const netflixSignupSchema = new mongoose.Schema({
     },
     mobile: {
         type: String,
-        required: true
+        required: true,
+        minLength: 10,
+        maxLength: 10
     },
     password: {
         type: String,
         required: true,
+        
     },
     cpassword: {
         type: String,
         required: true,
-    }
+        
+    },
+    tokens: [{
+        token: {
+            type: String,
+            required: true
+        }
+    }]
 })
+
+netflixSignupSchema.methods.generateAuthToken = async function () {
+    const token = await jwt.sign({ id: this._id.toString() }, process.env.SECRET_KEY);
+    this.tokens = this.tokens.concat({ token: token });
+    await this.save();
+    return token;
+}
 
 netflixSignupSchema.pre('save', async function (next) {
     if (this.isModified('password')) {
         this.password = await bcryptjs.hash(this.password, 10);
-        this.cpassword = undefined;
+        this.cpassword = await bcryptjs.hash(this.password, 10);
     }
     next();
 })
